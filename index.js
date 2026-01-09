@@ -12,7 +12,7 @@ const formElement = document.querySelector(".to-do__form" );
 const inputElement = document.querySelector(".to-do__input" );
 
 function loadTasks() {
-	const saved = localStorage.getItem("tasks" );
+	const saved = localStorage.getItem("tasks");
 	return saved ? JSON.parse(saved) : items;
 }
 
@@ -22,7 +22,7 @@ function createItem(item) {
 	const textElement = clone.querySelector(".to-do__item-text" );
 	const deleteButton = clone.querySelector(".to-do__item-button_type_delete" );
 	const duplicateButton = clone.querySelector(".to-do__item-button_type_duplicate" );
-	
+
 	const editButton = clone.querySelector(".to-do__item-button_type_edit" );
 
 	textElement.textContent = item;
@@ -72,15 +72,14 @@ formElement.addEventListener("submit" , function(event) {
 	const taskText = inputElement.value.trim();
 	if (taskText.length) {
 		const newItem = createItem(taskText);
-		const tasks = getTasksFromDOM();
 		listElement.prepend(newItem);
+		const tasks = getTasksFromDOM();
 		saveTasks(tasks);
 		inputElement.value = "" ;
 	}
 });
 
 const tasksItems = loadTasks();
-
 tasksItems.forEach(function(item) {
 	const itemElement = createItem(item);
 	listElement.append(itemElement);
